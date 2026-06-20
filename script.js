@@ -21,6 +21,7 @@ const resultText = document.getElementById('resultText');
 const foodInput = document.getElementById('foodInput');
 const addBtn = document.getElementById('addBtn');
 const foodListEl = document.getElementById('foodList');
+const addError = document.getElementById('addError');
 
 function drawWheel(angle) {
   const cx = canvas.width / 2;
@@ -129,13 +130,25 @@ function renderFoodList() {
 
 function addFood() {
   const name = foodInput.value.trim();
-  if (!name || foods.includes(name)) {
-    foodInput.focus();
+  if (!name) {
+    showAddError('음식 이름을 입력해 주세요.');
     return;
   }
+  if (foods.includes(name)) {
+    showAddError(`'${name}'은(는) 이미 목록에 있어요.`);
+    return;
+  }
+  addError.textContent = '';
   foods.push(name);
   foodInput.value = '';
+  foodInput.focus();
   renderFoodList();
+}
+
+function showAddError(msg) {
+  addError.textContent = msg;
+  foodInput.focus();
+  setTimeout(() => { addError.textContent = ''; }, 2500);
 }
 
 function removeFood(index) {
@@ -149,7 +162,7 @@ function removeFood(index) {
 
 spinBtn.addEventListener('click', spin);
 addBtn.addEventListener('click', addFood);
-foodInput.addEventListener('keydown', (e) => {
+foodInput.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') addFood();
 });
 

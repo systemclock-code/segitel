@@ -166,6 +166,14 @@ h1 {
   background: #e69500;
 }
 
+.add-error {
+  font-size: 0.82rem;
+  color: #ff4444;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  min-height: 1.2em;
+}
+
 #foodList {
   list-style: none;
   display: flex;
