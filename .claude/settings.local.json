@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -c http.sslVerify=false -c credential.helper= fetch origin)"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오늘 뭐 시켜먹지?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🍽️ 오늘 뭐 시켜먹지?</h1>
+    <p class="subtitle">결정 장애 해결사</p>
+
+    <div class="wheel-wrapper">
+      <div class="arrow">▼</div>
+      <canvas id="wheel" width="360" height="360"></canvas>
+    </div>
+
+    <button id="spinBtn" class="spin-btn">돌려돌려 룰렛!</button>
+
+    <div id="result" class="result hidden">
+      <p class="result-label">오늘의 선택</p>
+      <p id="resultText" class="result-text"></p>
+    </div>
+
+    <div class="food-manager">
+      <h2>음식 목록 관리</h2>
+      <div class="add-food">
+        <input id="foodInput" type="text" placeholder="음식 추가 (예: 떡볶이)" maxlength="12" />
+        <button id="addBtn">추가</button>
+      </div>
+      <ul id="foodList"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
