@@ -1,5 +1,63 @@
 [
   {
+    "id": "fitel-s185edv",
+    "brand": "Fitel",
+    "model": "S185EDV",
+    "category": "splicer",
+    "categoryLabel": "엔드뷰 융착 접속기",
+    "shortDesc": "세계 최초 복합 이미지 기술 적용 엔드뷰 융착 접속기 (특수 광섬유 전용)",
+    "features": [
+      "엔드뷰 시스템으로 Hollow Core·PCF 등 복잡한 내부 구조 광섬유 접속",
+      "세계 최초 복합 이미지 기술(CIT)로 양측 광섬유 이미지 겹쳐 정밀 정렬",
+      "이중 미러 시스템으로 양쪽 광섬유 단면 동시 관찰",
+      "0.1도 고정밀 회전 정렬",
+      "사이드뷰 모드 겸용으로 일반 광섬유도 접속 가능",
+      "컬러 필터 정렬 보조 기능"
+    ],
+    "specs": [
+      ["적용 광섬유", "SM / MM / DS / NZDS / High-Index / EDF / LDF / PMF / MCF"],
+      ["클래드 직경", "80~500 µm"],
+      ["코팅 직경", "160~1,300 µm (파이버 홀더) / 160~900 µm (코팅 클램프)"],
+      ["광섬유 클리브 길이", "6mm (코팅 클램프) / 8~10mm (클래딩 클램프)"],
+      ["평균 접속 손실", "SM(G.652) 0.014dB"],
+      ["접속 시간", "15초 (SM, 클래딩 클램프)"],
+      ["배율", "104X / 278X / 556X (사이드뷰) / 64X (엔드뷰)"],
+      ["크기", "210W × 180D × 165H mm"],
+      ["중량", "4.9kg (배터리 미포함)"]
+    ],
+    "image": "images/S185edv.jpg",
+    "pdf": "docs/S185EDV_Brochure.pdf"
+  },
+  {
+    "id": "fitel-s185ldf",
+    "brand": "Fitel",
+    "model": "S185LDF / S185PMLDF",
+    "category": "splicer",
+    "categoryLabel": "대경 광섬유 융착 접속기",
+    "shortDesc": "최대 500µm 클래딩 광섬유 고엔드 융착 접속기 (파이버 레이저 산업용)",
+    "features": [
+      "최대 500µm 클래딩 LDF·PM-LDF 광섬유 접속",
+      "0.03µm 정밀도 파이버 축 정렬",
+      "이전 모델 대비 46% 소형화",
+      "젠틀 랜딩 광섬유 클램프로 파이버 손상 방지",
+      "Wi-Fi 원격 제어",
+      "LCD 자동 플립 디스플레이"
+    ],
+    "specs": [
+      ["적용 광섬유 (S185LDF)", "SM / MM / DS / NZDS / EDF / LDF"],
+      ["적용 광섬유 (S185PMLDF)", "SM / MM / DS / NZDS / EDF / LDF / PMF"],
+      ["클래드 직경", "80~500 µm"],
+      ["코팅 직경", "160~2,000 µm (파이버 홀더) / 160~900 µm (코팅 클램프)"],
+      ["광섬유 클리브 길이", "3~4mm (코팅 클램프) / 8~11mm (클래딩 클램프)"],
+      ["평균 접속 손실", "SM(G.652) 0.014dB"],
+      ["접속 시간", "15초 (SM)"],
+      ["크기", "210W × 180D × 150H mm"],
+      ["중량", "4.5kg (S185LDF) / 4.75kg (S185PMLDF), 배터리 미포함"]
+    ],
+    "image": "images/S185ldf.jpg",
+    "pdf": "docs/S185LDF_Brochure.pdf"
+  },
+  {
     "id": "fitel-s327",
     "brand": "Fitel",
     "model": "S327",
@@ -118,64 +176,6 @@
     ],
     "image": "images/S179plus.jpg",
     "pdf": "docs/S179plus_Brochure.pdf"
-  },
-  {
-    "id": "fitel-s185edv",
-    "brand": "Fitel",
-    "model": "S185EDV",
-    "category": "splicer",
-    "categoryLabel": "엔드뷰 융착 접속기",
-    "shortDesc": "세계 최초 복합 이미지 기술 적용 엔드뷰 융착 접속기 (특수 광섬유 전용)",
-    "features": [
-      "엔드뷰 시스템으로 Hollow Core·PCF 등 복잡한 내부 구조 광섬유 접속",
-      "세계 최초 복합 이미지 기술(CIT)로 양측 광섬유 이미지 겹쳐 정밀 정렬",
-      "이중 미러 시스템으로 양쪽 광섬유 단면 동시 관찰",
-      "0.1도 고정밀 회전 정렬",
-      "사이드뷰 모드 겸용으로 일반 광섬유도 접속 가능",
-      "컬러 필터 정렬 보조 기능"
-    ],
-    "specs": [
-      ["적용 광섬유", "SM / MM / DS / NZDS / High-Index / EDF / LDF / PMF / MCF"],
-      ["클래드 직경", "80~500 µm"],
-      ["코팅 직경", "160~1,300 µm (파이버 홀더) / 160~900 µm (코팅 클램프)"],
-      ["광섬유 클리브 길이", "6mm (코팅 클램프) / 8~10mm (클래딩 클램프)"],
-      ["평균 접속 손실", "SM(G.652) 0.014dB"],
-      ["접속 시간", "15초 (SM, 클래딩 클램프)"],
-      ["배율", "104X / 278X / 556X (사이드뷰) / 64X (엔드뷰)"],
-      ["크기", "210W × 180D × 165H mm"],
-      ["중량", "4.9kg (배터리 미포함)"]
-    ],
-    "image": "images/S185edv.jpg",
-    "pdf": "docs/S185EDV_Brochure.pdf"
-  },
-  {
-    "id": "fitel-s185ldf",
-    "brand": "Fitel",
-    "model": "S185LDF / S185PMLDF",
-    "category": "splicer",
-    "categoryLabel": "대경 광섬유 융착 접속기",
-    "shortDesc": "최대 500µm 클래딩 광섬유 고엔드 융착 접속기 (파이버 레이저 산업용)",
-    "features": [
-      "최대 500µm 클래딩 LDF·PM-LDF 광섬유 접속",
-      "0.03µm 정밀도 파이버 축 정렬",
-      "이전 모델 대비 46% 소형화",
-      "젠틀 랜딩 광섬유 클램프로 파이버 손상 방지",
-      "Wi-Fi 원격 제어",
-      "LCD 자동 플립 디스플레이"
-    ],
-    "specs": [
-      ["적용 광섬유 (S185LDF)", "SM / MM / DS / NZDS / EDF / LDF"],
-      ["적용 광섬유 (S185PMLDF)", "SM / MM / DS / NZDS / EDF / LDF / PMF"],
-      ["클래드 직경", "80~500 µm"],
-      ["코팅 직경", "160~2,000 µm (파이버 홀더) / 160~900 µm (코팅 클램프)"],
-      ["광섬유 클리브 길이", "3~4mm (코팅 클램프) / 8~11mm (클래딩 클램프)"],
-      ["평균 접속 손실", "SM(G.652) 0.014dB"],
-      ["접속 시간", "15초 (SM)"],
-      ["크기", "210W × 180D × 150H mm"],
-      ["중량", "4.5kg (S185LDF) / 4.75kg (S185PMLDF), 배터리 미포함"]
-    ],
-    "image": "images/S185ldf.jpg",
-    "pdf": "docs/S185LDF_Brochure.pdf"
   },
   {
     "id": "northlab-procleave-ld2",
