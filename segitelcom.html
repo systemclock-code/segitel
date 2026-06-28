@@ -570,24 +570,6 @@
         <a href="products.html" class="btn-primary">취급 제품 보기</a>
         <a href="#contact" class="btn-outline">견적 문의</a>
       </div>
-      <div class="stats">
-        <div class="stat-item">
-          <span class="stat-num">20+</span>
-          <div class="stat-label">업력 (년)</div>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">500+</span>
-          <div class="stat-label">거래 파트너</div>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">1,000+</span>
-          <div class="stat-label">취급 모델</div>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">24/7</span>
-          <div class="stat-label">기술 지원</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -796,16 +778,16 @@
           <h3>빠른 문의</h3>
           <form id="contactForm">
             <div class="form-row">
-              <label>회사명 / 성함 *</label>
-              <input type="text" placeholder="예) 세기텔콤 홍길동" required />
+              <label for="f-name">회사명 / 성함 *</label>
+              <input id="f-name" name="회사명_성함" type="text" placeholder="예) 세기텔콤 홍길동" required />
             </div>
             <div class="form-row">
-              <label>연락처 *</label>
-              <input type="tel" placeholder="010-0000-0000" required />
+              <label for="f-tel">연락처 *</label>
+              <input id="f-tel" name="연락처" type="tel" placeholder="010-0000-0000" required />
             </div>
             <div class="form-row">
-              <label>문의 유형</label>
-              <select>
+              <label for="f-type">문의 유형</label>
+              <select id="f-type" name="문의_유형">
                 <option value="">선택해주세요</option>
                 <option>제품 구매 문의</option>
                 <option>견적 요청</option>
@@ -814,10 +796,10 @@
               </select>
             </div>
             <div class="form-row">
-              <label>문의 내용</label>
-              <textarea placeholder="문의하실 내용을 입력해주세요."></textarea>
+              <label for="f-msg">문의 내용</label>
+              <textarea id="f-msg" name="문의_내용" placeholder="문의하실 내용을 입력해주세요."></textarea>
             </div>
-            <button type="submit" class="btn-submit">문의 보내기</button>
+            <button type="submit" class="btn-submit" id="submitBtn">문의 보내기</button>
           </form>
         </div>
       </div>
@@ -866,13 +848,51 @@
       });
     });
 
-    // 문의 폼 제출
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
+    // 연락처 11자리 입력 시 문의 유형으로 포커스
+    document.getElementById('f-tel').addEventListener('input', (e) => {
+      const digits = e.target.value.replace(/\D/g, '');
+      if (digits.length >= 11) document.getElementById('f-type').focus();
+    });
+
+    // 문의 유형 선택 시 문의 내용으로 포커스
+    document.getElementById('f-type').addEventListener('change', () => {
+      document.getElementById('f-msg').focus();
+    });
+
+    // 문의 폼 제출 (Formspree)
+    const FORMSPREE_URL = 'https://formspree.io/f/xrewkajl';
+
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const btn = document.getElementById('submitBtn');
       const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      e.target.reset();
-      setTimeout(() => toast.classList.remove('show'), 4000);
+
+      btn.disabled = true;
+      btn.textContent = '전송 중...';
+
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(e.target),
+        });
+
+        if (res.ok) {
+          toast.textContent = '✅ 문의가 접수되었습니다. 빠른 시일 내 연락드리겠습니다.';
+          toast.style.background = 'var(--primary)';
+          e.target.reset();
+        } else {
+          throw new Error('서버 오류');
+        }
+      } catch {
+        toast.textContent = '❌ 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+        toast.style.background = '#c62828';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '문의 보내기';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 5000);
+      }
     });
 
     // 스크롤 시 헤더 그림자

@@ -145,7 +145,7 @@
       ["크기", "210W × 180D × 165H mm"],
       ["중량", "4.9kg (배터리 미포함)"]
     ],
-    "image": "images/S185EDV.jpg",
+    "image": "images/S185edv.jpg",
     "pdf": "docs/S185EDV_Brochure.pdf"
   },
   {
@@ -174,7 +174,7 @@
       ["크기", "210W × 180D × 150H mm"],
       ["중량", "4.5kg (S185LDF) / 4.75kg (S185PMLDF), 배터리 미포함"]
     ],
-    "image": "images/S185LDF.jpg",
+    "image": "images/S185ldf.jpg",
     "pdf": "docs/S185LDF_Brochure.pdf"
   },
   {
