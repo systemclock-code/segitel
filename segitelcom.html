@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>세기텔콤 | 통신장비 전문 유통</title>
+  <style>
+    :root {
+      --primary: #0a3d6b;
+      --primary-light: #1565c0;
+      --accent: #00b0ff;
+      --gray-100: #f4f6f9;
+      --gray-200: #e0e6ee;
+      --gray-500: #6b7a8d;
+      --gray-800: #1e2a38;
+      --white: #ffffff;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* ── 내비게이션 ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary-light); }
+
+    .nav-cta {
+      background: var(--primary);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--primary-light) !important; }
+
+    /* 햄버거 */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* 모바일 드로어 */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 1rem 1.25rem 1.5rem;
+      gap: 0.75rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ── 히어로 ── */
+    #hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d52a0 60%, #145da0 100%);
+      color: var(--white);
+      padding: 6rem 1.25rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-inner { position: relative; max-width: 760px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+      letter-spacing: -1px;
+    }
+    #hero h1 em { font-style: normal; color: var(--accent); }
+
+    #hero p {
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      opacity: 0.85;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* 통계 */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; }
+
+    /* ── 공통 섹션 ── */
+    section { padding: 5rem 1.25rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--gray-500);
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* ── 회사 소개 ── */
+    #about { background: var(--gray-100); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .about-visual {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 16px;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-icon {
+      font-size: 6rem;
+      opacity: 0.2;
+      position: absolute;
+    }
+    .about-tagline {
+      position: relative;
+      text-align: center;
+      color: var(--white);
+      padding: 2rem;
+    }
+    .about-tagline strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .about-tagline span { font-size: 0.95rem; opacity: 0.8; }
+
+    .about-points { display: flex; flex-direction: column; gap: 1.25rem; }
+    .about-point { display: flex; gap: 1rem; align-items: flex-start; }
+    .point-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    .point-text h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    .point-text p { font-size: 0.88rem; color: var(--gray-500); }
+
+    /* ── 취급 브랜드 ── */
+    #brands { background: var(--white); }
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+      margin-top: 3rem;
+    }
+    .brand-card {
+      border-radius: 16px;
+      border: 1.5px solid var(--gray-200);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .brand-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(10,61,107,0.13); }
+    .brand-card-header {
+      padding: 2rem 2rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .brand-card-header.fitel   { background: linear-gradient(135deg, #0a3d6b, #1565c0); }
+    .brand-card-header.northlab { background: linear-gradient(135deg, #1a5c38, #2e7d52); }
+    .brand-card-header.sae      { background: linear-gradient(135deg, #6a1b2a, #c0392b); }
+    .brand-logo-box {
+      width: 56px; height: 56px; min-width: 56px;
+      background: rgba(255,255,255,0.18); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 900; color: #fff;
+      letter-spacing: -1px;
+    }
+    .brand-name-wrap { color: #fff; }
+    .brand-name { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.5px; line-height: 1.1; }
+    .brand-origin { font-size: 0.78rem; opacity: 0.7; margin-top: 0.2rem; }
+    .brand-card-body { padding: 1.5rem 2rem 1.75rem; background: var(--white); }
+    .brand-card-body p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.75; margin-bottom: 1.25rem; }
+    .brand-keywords { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .brand-keyword {
+      background: var(--gray-100); border: 1px solid var(--gray-200);
+      border-radius: 50px; padding: 0.2rem 0.65rem;
+      font-size: 0.75rem; color: var(--gray-500); font-weight: 600;
+    }
+    .brand-link {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--primary-light);
+    }
+
+    /* ── 핵심 가치 ── */
+    #values { background: var(--primary); color: var(--white); }
+    #values .section-tag { color: var(--accent); }
+    #values .section-title { color: var(--white); }
+    #values .section-desc { color: rgba(255,255,255,0.7); max-width: 100%; }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .value-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: background 0.25s;
+    }
+    .value-card:hover { background: rgba(255,255,255,0.13); }
+    .value-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--accent);
+      opacity: 0.5;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .value-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .value-card p { font-size: 0.85rem; opacity: 0.7; line-height: 1.7; }
+
+    /* ── 연락처 ── */
+    #contact { background: var(--gray-100); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-item h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+    .contact-item p { font-size: 0.95rem; font-weight: 600; color: var(--gray-800); }
+
+    .contact-form {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .contact-form h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem; }
+
+    .form-row { margin-bottom: 1.1rem; }
+    .form-row label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray-500);
+      margin-bottom: 0.4rem;
+    }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--gray-800);
+      transition: border-color 0.2s;
+      background: var(--white);
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus { outline: none; border-color: var(--primary-light); }
+    .form-row textarea { height: 100px; resize: vertical; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--primary-light); }
+
+    /* ── 푸터 ── */
+    footer {
+      background: var(--gray-800);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem 1.25rem 2rem;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-logo { font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
+    .footer-logo span { color: var(--accent); }
+    .footer-tagline { font-size: 0.85rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+    }
+
+    /* 토스트 */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.9rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 200;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-visual { height: 220px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      section { padding: 3.5rem 1.25rem; }
+      .stats { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 내비게이션 -->
+  <header>
+    <nav>
+      <a class="logo" href="#hero">세기<span>텔콤</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">회사 소개</a></li>
+        <li><a href="products.html">취급 제품</a></li>
+        <li><a href="#values">핵심 가치</a></li>
+        <li><a href="#contact" class="nav-cta">문의하기</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="메뉴">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" class="mobile-link">회사 소개</a>
+      <a href="#products" class="mobile-link">취급 제품</a>
+      <a href="#values" class="mobile-link">핵심 가치</a>
+      <a href="#contact" class="mobile-link">문의하기</a>
+    </div>
+  </header>
+
+  <!-- 히어로 -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">통신장비 전문 유통 기업</div>
+      <h1>신뢰를 연결하는<br /><em>세기텔콤</em></h1>
+      <p>
+        20년 이상의 전문 노하우로<br />
+        최적의 통신장비 솔루션을 공급합니다.
+      </p>
+      <div class="hero-btns">
+        <a href="products.html" class="btn-primary">취급 제품 보기</a>
+        <a href="#contact" class="btn-outline">견적 문의</a>
+      </div>
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-num">20+</span>
+          <div class="stat-label">업력 (년)</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <div class="stat-label">거래 파트너</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1,000+</span>
+          <div class="stat-label">취급 모델</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">24/7</span>
+          <div class="stat-label">기술 지원</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 회사 소개 -->
+  <section id="about">
+    <div class="container">
+      <div class="section-tag">About Us</div>
+      <h2 class="section-title">통신의 근간을 잇다</h2>
+      <p class="section-desc">
+        세기텔콤은 유무선 통신장비 유통 분야에서 오랜 경험을 바탕으로,
+        고객사에게 최적화된 제품과 기술 지원을 제공하는 전문 기업입니다.
+      </p>
+      <div class="about-grid">
+        <div class="about-visual">
+          <span class="about-icon">📡</span>
+          <div class="about-tagline">
+            <strong>세기텔콤</strong>
+            <span>Connecting the Future</span>
+          </div>
+        </div>
+        <div class="about-points">
+          <div class="about-point">
+            <div class="point-icon">🏢</div>
+            <div class="point-text">
+              <h4>풍부한 업계 경험</h4>
+              <p>통신장비 유통 분야에서 20년 이상 축적된 전문성으로 고객의 요구를 정확히 파악하고 해결합니다.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="point-icon">🤝</div>
+            <div class="point-text">
+              <h4>글로벌 파트너십</h4>
+              <p>국내외 주요 통신장비 제조사들과의 공식 파트너 계약을 통해 정품 장비를 경쟁력 있는 가격에 공급합니다.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="point-icon">🛠️</div>
+            <div class="point-text">
+              <h4>기술 지원 서비스</h4>
+              <p>제품 납품 이후에도 전문 엔지니어 팀이 설치, 구성, 유지보수를 지원합니다.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="point-icon">📦</div>
+            <div class="point-text">
+              <h4>빠른 조달 능력</h4>
+              <p>충분한 재고 운영과 긴밀한 공급망을 통해 긴급 발주에도 신속하게 대응합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 취급 브랜드 -->
+  <section id="brands">
+    <div class="container">
+      <div class="section-tag">Partner Brands</div>
+      <h2 class="section-title">취급 브랜드</h2>
+      <p class="section-desc">
+        세계 최고 수준의 광통신 장비 전문 브랜드 제품을 직접 공급합니다.
+      </p>
+      <div class="brands-grid">
+
+        <a href="products.html?brand=Fitel" class="brand-card">
+          <div class="brand-card-header fitel">
+            <div class="brand-logo-box">F</div>
+            <div class="brand-name-wrap">
+              <div class="brand-name">Fitel</div>
+              <div class="brand-origin">Furukawa Electric · Japan</div>
+            </div>
+          </div>
+          <div class="brand-card-body">
+            <p>후루카와 전기 그룹의 광통신 장비 브랜드. 융착 접속기·클리버 분야 세계 최고 수준의 정밀도와 내구성을 자랑하며, 통신사·연구소 현장에서 신뢰받는 브랜드입니다.</p>
+            <div class="brand-keywords">
+              <span class="brand-keyword">융착 접속기</span>
+              <span class="brand-keyword">광섬유 클리버</span>
+              <span class="brand-keyword">OTDR</span>
+              <span class="brand-keyword">광측정기</span>
+            </div>
+            <span class="brand-link">제품 보기 →</span>
+          </div>
+        </a>
+
+        <a href="products.html?brand=Northlab" class="brand-card">
+          <div class="brand-card-header northlab">
+            <div class="brand-logo-box">N</div>
+            <div class="brand-name-wrap">
+              <div class="brand-name">Northlab</div>
+              <div class="brand-origin">Northlab Photonics · Sweden</div>
+            </div>
+          </div>
+          <div class="brand-card-body">
+            <p>스웨덴 기반의 특수 광섬유 가공 장비 전문 기업. 고정밀 클리버 및 특수 광섬유용 융착 접속기를 전문으로 하며, 연구·개발 및 산업 현장에 최적화된 솔루션을 제공합니다.</p>
+            <div class="brand-keywords">
+              <span class="brand-keyword">특수 광섬유 클리버</span>
+              <span class="brand-keyword">정밀 가공</span>
+              <span class="brand-keyword">R&amp;D 장비</span>
+            </div>
+            <span class="brand-link">제품 보기 →</span>
+          </div>
+        </a>
+
+        <a href="products.html?brand=3SAE" class="brand-card">
+          <div class="brand-card-header sae">
+            <div class="brand-logo-box">3S</div>
+            <div class="brand-name-wrap">
+              <div class="brand-name">3SAE</div>
+              <div class="brand-origin">3SAE Technologies · USA</div>
+            </div>
+          </div>
+          <div class="brand-card-body">
+            <p>미국의 특수 광섬유 가공 기술 선도 기업. 테이퍼링·스플라이싱 등 고난도 광섬유 처리 솔루션에 특화되어 있으며, 광센서·의료·방산 분야 고객에게 공급합니다.</p>
+            <div class="brand-keywords">
+              <span class="brand-keyword">테이퍼링</span>
+              <span class="brand-keyword">특수 스플라이싱</span>
+              <span class="brand-keyword">광센서</span>
+              <span class="brand-keyword">방산·의료</span>
+            </div>
+            <span class="brand-link">제품 보기 →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 핵심 가치 -->
+  <section id="values">
+    <div class="container">
+      <div class="section-tag">Core Values</div>
+      <h2 class="section-title">세기텔콤이 약속하는 것</h2>
+      <p class="section-desc">모든 거래에서 고객의 신뢰를 최우선으로 생각합니다.</p>
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="value-num">01</span>
+          <h3>정품 보증</h3>
+          <p>공식 파트너사를 통한 정품 장비만 취급하며, 모든 제품에 제조사 정품 보증을 적용합니다.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-num">02</span>
+          <h3>가격 경쟁력</h3>
+          <p>직접 계약을 통한 안정적인 공급망으로 합리적인 가격을 제공합니다.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-num">03</span>
+          <h3>신속한 납기</h3>
+          <p>긴급 프로젝트에도 대응 가능한 물류 체계와 안정적인 재고를 갖추고 있습니다.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-num">04</span>
+          <h3>전문 기술 지원</h3>
+          <p>제품 납품 후에도 전담 엔지니어가 지속적인 기술 지원을 제공합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 연락처 -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">문의 & 견적</h2>
+      <p class="section-desc">
+        제품 문의, 견적 요청, 기술 상담 모두 빠르게 답변드립니다.
+      </p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>대표 전화</h4>
+              <p>02-0000-0000</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📠</div>
+            <div>
+              <h4>팩스</h4>
+              <p>02-0000-0001</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>이메일</h4>
+              <p>info@segitelcom.co.kr</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>주소</h4>
+              <p>서울특별시 OO구 OO로 000, OO빌딩 0층</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>영업 시간</h4>
+              <p>평일 09:00 – 18:00 (주말·공휴일 휴무)</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>빠른 문의</h3>
+          <form id="contactForm">
+            <div class="form-row">
+              <label>회사명 / 성함 *</label>
+              <input type="text" placeholder="예) 세기텔콤 홍길동" required />
+            </div>
+            <div class="form-row">
+              <label>연락처 *</label>
+              <input type="tel" placeholder="010-0000-0000" required />
+            </div>
+            <div class="form-row">
+              <label>문의 유형</label>
+              <select>
+                <option value="">선택해주세요</option>
+                <option>제품 구매 문의</option>
+                <option>견적 요청</option>
+                <option>기술 지원</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>문의 내용</label>
+              <textarea placeholder="문의하실 내용을 입력해주세요."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">문의 보내기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">세기<span>텔콤</span></div>
+          <div class="footer-tagline">통신장비 전문 유통 기업</div>
+        </div>
+        <nav class="footer-links">
+          <a href="#about">회사 소개</a>
+          <a href="#products">취급 제품</a>
+          <a href="#values">핵심 가치</a>
+          <a href="#contact">문의하기</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 세기텔콤. All rights reserved.</span>
+        <span>사업자등록번호: 000-00-00000</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 토스트 알림 -->
+  <div class="toast" id="toast">문의가 접수되었습니다. 빠른 시일 내 연락드리겠습니다.</div>
+
+  <script>
+    // 햄버거 메뉴
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // 문의 폼 제출
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      e.target.reset();
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    });
+
+    // 스크롤 시 헤더 그림자
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.style.boxShadow = window.scrollY > 10
+        ? '0 2px 16px rgba(0,0,0,0.13)'
+        : '0 4px 20px rgba(0,0,0,0.08)';
+    });
+
+    // 카드 fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.product-card, .value-card, .about-point').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
