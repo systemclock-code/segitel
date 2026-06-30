@@ -415,6 +415,32 @@
       mask-image: radial-gradient(100% 100% at 30% 20%, #000 30%, transparent 75%);
       -webkit-mask-image: radial-gradient(100% 100% at 30% 20%, #000 30%, transparent 75%);
     }
+    /* about 비주얼 유튜브 배경 영상 */
+    .about-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      pointer-events: none;
+    }
+    .about-video iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: max(100%, 640px);   /* 컨테이너를 항상 덮도록 */
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border: 0;
+    }
+    .about-video-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(5,15,31,0.42) 0%, rgba(5,15,31,0.72) 100%);
+      pointer-events: none;
+    }
     .about-icon {
       font-size: 6rem;
       opacity: 0.18;
@@ -423,7 +449,7 @@
     }
     .about-tagline {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       text-align: center;
       color: var(--white);
       padding: 2rem;
@@ -817,6 +843,14 @@
       </p>
       <div class="about-grid">
         <div class="about-visual">
+          <div class="about-video">
+            <iframe
+              src="https://www.youtube.com/embed/4W2kmJSZ07Y?autoplay=1&mute=1&controls=0&loop=1&playlist=4W2kmJSZ07Y&playsinline=1&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3"
+              title="세기텔콤 소개 영상"
+              allow="autoplay; encrypted-media"
+              frameborder="0"></iframe>
+          </div>
+          <div class="about-video-overlay"></div>
           <span class="about-icon">📡</span>
           <div class="about-tagline">
             <strong>세기텔콤</strong>
