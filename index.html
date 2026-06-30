@@ -53,13 +53,25 @@
     }
 
     .logo {
-      font-size: 1.35rem;
-      font-weight: 800;
+      display: inline-flex;
+      align-items: flex-end;
+      font-size: 1.34rem;
+      font-weight: 700;
       color: var(--primary);
-      letter-spacing: -0.5px;
+      letter-spacing: -0.6px;
+      line-height: 1;
       text-decoration: none;
     }
-    .logo span { color: var(--accent); }
+    .logo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-grad);
+      margin-left: 4px;
+      margin-bottom: 3px;
+      transition: transform 0.2s ease;
+    }
+    .logo:hover .logo-dot { transform: scale(1.25); }
 
     .nav-links {
       display: flex;
@@ -725,8 +737,7 @@
       padding-bottom: 2rem;
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .footer-logo { font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
-    .footer-logo span { color: var(--accent); }
+    .footer-logo { display: inline-flex; align-items: flex-end; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; line-height: 1; letter-spacing: -0.6px; }
     .footer-tagline { font-size: 0.85rem; }
     .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .footer-links a {
@@ -788,7 +799,7 @@
   <!-- 내비게이션 -->
   <header>
     <nav>
-      <a class="logo" href="#hero">세기<span>텔콤</span></a>
+      <a class="logo" href="#hero">세기텔콤<i class="logo-dot"></i></a>
       <ul class="nav-links">
         <li><a href="#about">회사 소개</a></li>
         <li><a href="products.html">취급 제품</a></li>
@@ -1082,7 +1093,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div>
-          <div class="footer-logo">세기<span>텔콤</span></div>
+          <div class="footer-logo">세기텔콤<i class="logo-dot"></i></div>
           <div class="footer-tagline">통신장비 전문 유통 기업</div>
         </div>
         <nav class="footer-links">
